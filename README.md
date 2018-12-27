@@ -1,5 +1,9 @@
 # SmartWebFramework
 
+[![Build Status](https://travis-ci.com/welldoer/SmartWebFramework.svg?branch=master)](https://travis-ci.com/welldoer/SmartWebFramework)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=welldoer_SmartWebFramework&metric=coverage)](https://sonarcloud.io/dashboard?id=welldoer_SmartWebFramework)
+
+
 参考《架构探险 从零开始写 Java Web 框架》
 
 #### 待开发任务清单
