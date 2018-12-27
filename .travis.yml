@@ -12,6 +12,7 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
+  - gradle clean
   - gradle check --info
   - ls -la /home/travis/build/welldoer/SmartWebFramework/
   - find /home/travis/build/welldoer/SmartWebFramework
