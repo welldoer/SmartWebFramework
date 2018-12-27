@@ -12,7 +12,7 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
-  - gradle check --debug
+  - gradle check --info
   - ls -la /home/travis/build/welldoer/SmartWebFramework/
   - find /home/travis/build/welldoer/SmartWebFramework
   - cat /home/travis/build/welldoer/SmartWebFramework/build/test-results/test/TEST-net.blogjava.*.xml
