@@ -13,4 +13,7 @@ before_script:
 
 script:
   - gradle check
+  - ls -la /home/travis/build/welldoer/SmartWebFramework/
+  - find /home/travis/build/welldoer/SmartWebFramework
+  - cat /home/travis/build/welldoer/SmartWebFramework/build/test-results/test/TEST-net.blogjava.*.xml
   - sonar-scanner
