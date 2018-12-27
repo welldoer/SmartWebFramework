@@ -29,7 +29,11 @@ dependencies {
 //	implementation 'javax.servlet.jsp:jsp-api:2.2'
 //	implementation 'javax.servlet:jstl:1.2'
 	
+	implementation 'org.apache.commons:commons-lang3:3.8.1'
+	implementation 'org.apache.commons:commons-collections4:4.2'
+	
     implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'org.slf4j:slf4j-log4j12:1.8.0-beta2'
 
 	implementation 'org.xerial:sqlite-jdbc:3.20.0'
 	
