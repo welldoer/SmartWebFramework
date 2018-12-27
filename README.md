@@ -13,6 +13,6 @@
 
 ~~5. 编写第一个简单框架的验证代码~~
 
-6. 配置Travis-CI
+~~6. 配置Travis-CI~~
 
-7. 配置SonarCloud
+~~7. 配置SonarCloud~~
