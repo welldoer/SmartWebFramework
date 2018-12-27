@@ -33,37 +33,37 @@ class CustomerServiceTest {
 		Assertions.assertEquals( 2, customerList.size() );
 	}
 	
-	@Disabled
-	@Test
-	public void testGetCustomer() {
-		Customer customer = customerService.getCustomer( 1 );
-		Assertions.assertNotNull( customer );
-	}
-	
-	@Disabled
-	@Test
-	public void testCreateCustomer() {
-		Map<String, Object> fieldMap = new HashMap<>();
-		fieldMap.put( "name", "customer100" );
-		fieldMap.put( "contact", "John" );
-		fieldMap.put( "telephone", "13512345678" );
-		boolean result = customerService.createCustomer( fieldMap );
-		Assertions.assertTrue( result );
-	}
-
-	@Disabled
-	@Test
-	public void testUpdateCustomer() {
-		Map<String, Object> fieldMap = new HashMap<>();
-		fieldMap.put( "contact", "Eric" );
-		boolean result = customerService.updateCustomer( 1, fieldMap );
-		Assertions.assertTrue( result );
-	}
-	
-	@Disabled
-	@Test
-	public void testDeleteCustomer() {
-		boolean result = customerService.deleteCustomer( 1 );
-		Assertions.assertTrue( result );
-	}
+//	@Disabled
+//	@Test
+//	public void testGetCustomer() {
+//		Customer customer = customerService.getCustomer( 1 );
+//		Assertions.assertNotNull( customer );
+//	}
+//	
+//	@Disabled
+//	@Test
+//	public void testCreateCustomer() {
+//		Map<String, Object> fieldMap = new HashMap<>();
+//		fieldMap.put( "name", "customer100" );
+//		fieldMap.put( "contact", "John" );
+//		fieldMap.put( "telephone", "13512345678" );
+//		boolean result = customerService.createCustomer( fieldMap );
+//		Assertions.assertTrue( result );
+//	}
+//
+//	@Disabled
+//	@Test
+//	public void testUpdateCustomer() {
+//		Map<String, Object> fieldMap = new HashMap<>();
+//		fieldMap.put( "contact", "Eric" );
+//		boolean result = customerService.updateCustomer( 1, fieldMap );
+//		Assertions.assertTrue( result );
+//	}
+//	
+//	@Disabled
+//	@Test
+//	public void testDeleteCustomer() {
+//		boolean result = customerService.deleteCustomer( 1 );
+//		Assertions.assertTrue( result );
+//	}
 }
