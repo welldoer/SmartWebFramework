@@ -11,6 +11,8 @@ plugins {
 	id 'war'
     id 'org.akhikhl.gretty' version '1.4.2'
 	id 'com.github.gmazzo.sqlite' version '0.2'
+
+    id "jacoco"
 }
 
 // In this section you declare where to find the dependencies of your project
@@ -64,3 +66,13 @@ task createSampleDatabase {
     
     build.dependsOn it
 }
+
+jacocoTestReport {
+    reports {
+    	xml.enabled  = true
+        html.enabled = false
+    }
+}
+
+check.dependsOn jacocoTestReport
+
