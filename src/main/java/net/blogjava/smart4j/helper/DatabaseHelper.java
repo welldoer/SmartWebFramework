@@ -1,7 +1,9 @@
 package net.blogjava.smart4j.helper;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -157,5 +159,19 @@ public final class DatabaseHelper {
 	
 	private static String getTableName( Class<?> entityClass ) {
 		return entityClass.getSimpleName();
+	}
+	
+	public static void executeSqlFile( String filePath ) {
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream( filePath );
+		BufferedReader reader = new BufferedReader( new InputStreamReader( is ) );
+		try {
+			String sql;
+			while( ( sql = reader.readLine() ) != null ) {
+				DatabaseHelper.executeUpdate( sql );
+			}
+		} catch( Exception e ) {
+			LOGGER.error( "execute sql file failure", e );
+			throw new RuntimeException( e );
+		}
 	}
 }

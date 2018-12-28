@@ -2,6 +2,9 @@ package net.blogjava.smart4j.service;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.blogjava.smart4j.helper.DatabaseHelper;
 import net.blogjava.smart4j.model.Customer;
 
 public class CustomerServiceTest {
@@ -19,6 +23,8 @@ public class CustomerServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		customerService = new CustomerService();
+		
+		DatabaseHelper.executeSqlFile( "sql/customer_init.sql" );
 	}
 
 	@After

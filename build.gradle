@@ -75,6 +75,29 @@ task createSampleDatabase {
     build.dependsOn it
 }
 
+task createTestDatabase {
+    def databaseFile = file("$buildDir/test.db")
+
+    outputs.file databaseFile
+
+    doLast {
+        def db = openSQLiteDatabase(databaseFile)
+        db.execute 'DROP TABLE IF EXISTS customer'
+        db.execute 'CREATE TABLE customer ( \
+        				id			INTEGER PRIMARY KEY, \
+        				name		varchar(255) DEFAULT NULL, \
+        				contact		varchar(255) DEFAULT NULL, \
+        				telephone	varchar(255) DEFAULT NULL, \
+        				email		varchar(255) DEFAULT NULL, \
+        				remark		text \
+        				)'
+        db.execute 'INSERT INTO customer VALUES ( 1, "customer1", "Jack", "13512345678", "jack@gmail.com", null )'
+        db.execute 'INSERT INTO customer VALUES ( 2, "customer2", "Rose", "13623456789", "rose@gmail.com", null )'
+    }
+    
+    test.dependsOn it
+}
+
 jacocoTestReport {
     reports {
     	xml.enabled  = true
