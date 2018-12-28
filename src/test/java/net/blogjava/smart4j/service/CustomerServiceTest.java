@@ -1,36 +1,43 @@
 package net.blogjava.smart4j.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+//import org.junit.jupiter.api.AfterEach;
+//import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Disabled;
+//import org.junit.jupiter.api.Test;
 
 import net.blogjava.smart4j.model.Customer;
 
-class CustomerServiceTest {
+public class CustomerServiceTest {
 	
 	private CustomerService customerService;
 
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+//	@BeforeEach
+	public void setUp() throws Exception {
 		customerService = new CustomerService();
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	@After
+//	@AfterEach
+	public void tearDown() throws Exception {
 	}
 
 	@Test
 	public void testGetCustomerList() {
 		List<Customer> customerList = customerService.getCustomerList( "" );
-		Assertions.assertEquals( 2, customerList.size() );
+		assertEquals( 2, customerList.size() );
+//		Assertions.assertEquals( 2, customerList.size() );
 	}
 	
 //	@Disabled
