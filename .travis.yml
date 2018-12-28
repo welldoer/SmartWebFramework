@@ -13,7 +13,7 @@ before_script:
 
 script:
   - gradle clean
-  - gradle build
+  - gradle createSampleDatabase
   - gradle check --info
   - ls -la /home/travis/build/welldoer/SmartWebFramework/
   - find /home/travis/build/welldoer/SmartWebFramework
