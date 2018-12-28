@@ -12,10 +12,10 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
-  - gradle clean
+//  - gradle clean
   - gradle createSampleDatabase
-  - gradle check --info
-  - ls -la /home/travis/build/welldoer/SmartWebFramework/
-  - find /home/travis/build/welldoer/SmartWebFramework
+  - gradle check
+//  - ls -la /home/travis/build/welldoer/SmartWebFramework/
+//  - find /home/travis/build/welldoer/SmartWebFramework
   - cat /home/travis/build/welldoer/SmartWebFramework/build/test-results/test/TEST-net.blogjava.*.xml
   - sonar-scanner
