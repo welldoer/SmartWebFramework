@@ -13,6 +13,7 @@ before_script:
 
 script:
   - gradle clean
+  - gradle build
   - gradle check --info
   - ls -la /home/travis/build/welldoer/SmartWebFramework/
   - find /home/travis/build/welldoer/SmartWebFramework
