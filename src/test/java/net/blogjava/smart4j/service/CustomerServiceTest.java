@@ -1,20 +1,14 @@
 package net.blogjava.smart4j.service;
 
-//import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import org.junit.After;
-//import org.junit.Before;
-//import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import net.blogjava.smart4j.model.Customer;
 
@@ -22,14 +16,12 @@ public class CustomerServiceTest {
 	
 	private CustomerService customerService;
 
-//	@Before
-	@BeforeEach
+	@Before
 	public void setUp() throws Exception {
 		customerService = new CustomerService();
 	}
 
-//	@After
-	@AfterEach
+	@After
 	public void tearDown() throws Exception {
 	}
 
