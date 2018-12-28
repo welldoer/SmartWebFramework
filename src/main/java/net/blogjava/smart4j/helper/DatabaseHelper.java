@@ -17,6 +17,8 @@ public final class DatabaseHelper {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger( DatabaseHelper.class );
 	
+	private static final ThreadLocal<Connection> CONNECTION_HOLDER = new ThreadLocal<>();
+	
 	private static final QueryRunner QUERY_RUNNER = new QueryRunner();
 
 	private static final String DRIVER;
@@ -36,34 +38,44 @@ public final class DatabaseHelper {
 	}
 	
 	public static Connection getConnection() {
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection( URL );
-		} catch( SQLException e ) {
-			LOGGER.error( "get connection failure", e );
+		Connection conn = CONNECTION_HOLDER.get();
+		if( conn == null ) {
+			try {
+				conn = DriverManager.getConnection( URL );
+			} catch( SQLException e ) {
+				LOGGER.error( "get connection failure", e );
+				throw new RuntimeException( e );
+			} finally {
+				CONNECTION_HOLDER.set( conn );
+			}
 		}
 		return conn;
 	}
 
-	public static void closeConnection( Connection conn ) {
+	public static void closeConnection() {
+		Connection conn = CONNECTION_HOLDER.get();
 		if( conn != null ) {
 			try {
 				conn.close();
 			} catch( SQLException e ) {
 				LOGGER.error( "close connection failure", e );
+				throw new RuntimeException( e );
+			} finally {
+				CONNECTION_HOLDER.remove();
 			}
 		}
 	}
 	
-	public static <T> List<T> queryEntityList( Class<T> entityClass, Connection conn, String sql, Object... params ) {
+	public static <T> List<T> queryEntityList( Class<T> entityClass, String sql, Object... params ) {
 		List<T> entityList;
 		try {
+			Connection conn = getConnection();
 			entityList = QUERY_RUNNER.query( conn, sql, new BeanListHandler<T>( entityClass ), params );
 		} catch( SQLException e ) {
 			LOGGER.error( "query entity list failure", e );
 			throw new RuntimeException( e );
 		} finally {
-			closeConnection( conn );
+			closeConnection();
 		}
 		return entityList;
 	}
