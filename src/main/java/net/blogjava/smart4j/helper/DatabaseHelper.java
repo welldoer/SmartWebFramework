@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -22,31 +23,32 @@ public final class DatabaseHelper {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger( DatabaseHelper.class );
 	
-	private static final ThreadLocal<Connection> CONNECTION_HOLDER = new ThreadLocal<>();
+	private static final ThreadLocal<Connection> CONNECTION_HOLDER;
 	
-	private static final QueryRunner QUERY_RUNNER = new QueryRunner();
+	private static final QueryRunner QUERY_RUNNER;
 
-	private static final String DRIVER;
-	private static final String URL;
+	private static final BasicDataSource DATA_SOURCE;
 	
 	static {
+		CONNECTION_HOLDER = new ThreadLocal<>();
+		
+		QUERY_RUNNER = new QueryRunner();
+		
 		Properties conf = PropsUtil.loadProps( "config.properties" );
 		
-		DRIVER = conf.getProperty( "jdbc.driver" );
-		URL = conf.getProperty( "jdbc.url" );
+		String driver = conf.getProperty( "jdbc.driver" );
+		String url = conf.getProperty( "jdbc.url" );
 		
-		try {
-			Class.forName( DRIVER );
-		} catch( ClassNotFoundException e ) {
-			LOGGER.error( "can not load jdbc driver", e );
-		}
+		DATA_SOURCE = new BasicDataSource();
+		DATA_SOURCE.setDriverClassName( driver );
+		DATA_SOURCE.setUrl( url );
 	}
 	
 	public static Connection getConnection() {
 		Connection conn = CONNECTION_HOLDER.get();
 		if( conn == null ) {
 			try {
-				conn = DriverManager.getConnection( URL );
+				conn = DATA_SOURCE.getConnection();
 			} catch( SQLException e ) {
 				LOGGER.error( "get connection failure", e );
 				throw new RuntimeException( e );
@@ -57,20 +59,6 @@ public final class DatabaseHelper {
 		return conn;
 	}
 
-	public static void closeConnection() {
-		Connection conn = CONNECTION_HOLDER.get();
-		if( conn != null ) {
-			try {
-				conn.close();
-			} catch( SQLException e ) {
-				LOGGER.error( "close connection failure", e );
-				throw new RuntimeException( e );
-			} finally {
-				CONNECTION_HOLDER.remove();
-			}
-		}
-	}
-	
 	public static <T> List<T> queryEntityList( Class<T> entityClass, String sql, Object... params ) {
 		List<T> entityList;
 		try {
@@ -79,8 +67,6 @@ public final class DatabaseHelper {
 		} catch( SQLException e ) {
 			LOGGER.error( "query entity list failure", e );
 			throw new RuntimeException( e );
-		} finally {
-			closeConnection();
 		}
 		return entityList;
 	}
@@ -93,8 +79,6 @@ public final class DatabaseHelper {
 		} catch ( SQLException e ) {
 			LOGGER.error( "query entity failure", e );
 			throw new RuntimeException( e );
-		} finally {
-			closeConnection();
 		}
 		return entity;
 	}
@@ -119,8 +103,6 @@ public final class DatabaseHelper {
 		} catch ( SQLException e ) {
 			LOGGER.error( "execute update failure", e );
 			throw new RuntimeException( e );
-		} finally {
-			closeConnection();
 		}
 		return rows;
 	}
