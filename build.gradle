@@ -55,7 +55,7 @@ task createSampleDatabase {
 
     doLast {
         def db = openSQLiteDatabase(databaseFile)
-        db.execute 'DROP TABLE customer'
+        db.execute 'DROP TABLE IF EXISTS customer'
         db.execute 'CREATE TABLE customer ( \
         				id			bigint(20) NOT NULL PRIMARY KEY, \
         				name		varchar(255) DEFAULT NULL, \
