@@ -8,7 +8,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.blogjava.smart4j.service.CustomerService;
 import net.blogjava.smart4j.util.PropsUtil;
 
 public final class DatabaseHelper {
