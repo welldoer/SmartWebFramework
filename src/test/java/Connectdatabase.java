@@ -15,7 +15,7 @@ public class Connectdatabase {
 
         Connection con = null;
 
-        @Test
+//        @Test
         public void testDB() {
         	ConnecrDb();
         }
