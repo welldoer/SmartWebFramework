@@ -13,6 +13,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.blogjava.smart4j.helper.DatabaseHelper;
 import net.blogjava.smart4j.model.Customer;
 import net.blogjava.smart4j.util.PropsUtil;
 
@@ -41,7 +42,7 @@ public class CustomerService {
 		try {
 			List<Customer> customerList = new ArrayList<>();
 			String sql = "SELECT * FROM customer";
-			conn = DriverManager.getConnection( URL );
+			conn = DatabaseHelper.getConnection();
 			PreparedStatement stmt = conn.prepareStatement( sql );
 			ResultSet rs = stmt.executeQuery();
 			while( rs.next() ) {
@@ -58,13 +59,7 @@ public class CustomerService {
 		} catch( SQLException e ) {
 			LOGGER.error( "execute sql failure", e );
 		} finally {
-			if( conn != null ) {
-				try {
-					conn.close();
-				} catch( SQLException e ) {
-					LOGGER.error( "close connection failure", e );
-				}
-			}
+			DatabaseHelper.closeConnection( conn );
 		}
 		return null;
 	}
