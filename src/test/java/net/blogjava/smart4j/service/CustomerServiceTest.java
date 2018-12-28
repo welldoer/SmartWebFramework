@@ -57,7 +57,7 @@ public class CustomerServiceTest {
 	
 	@Test
 	public void testDeleteCustomer() {
-		boolean result = customerService.deleteCustomer( 1 );
+		boolean result = customerService.deleteCustomer( 2 );
 		assertTrue( result );
 	}
 }
