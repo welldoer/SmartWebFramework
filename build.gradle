@@ -58,7 +58,7 @@ task createSampleDatabase {
         def db = openSQLiteDatabase(databaseFile)
         db.execute 'DROP TABLE IF EXISTS customer'
         db.execute 'CREATE TABLE customer ( \
-        				id			bigint(20) NOT NULL PRIMARY KEY, \
+        				id			INTEGER PRIMARY KEY, \
         				name		varchar(255) DEFAULT NULL, \
         				contact		varchar(255) DEFAULT NULL, \
         				telephone	varchar(255) DEFAULT NULL, \
